@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .interface{
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(35, 114, 184);
+        }
+
+        .container{
+            position: relative;
+            height: 500px;
+            width: 300px;
+            text-align: center;
+        }
+
+
+        .container img{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            transition: 0.5s;
+        }
+
+        .bullets{
+            position: absolute;
+            margin-top: 350px;
+        }
+        
+        .bullet-single{
+            margin: 0 8px;
+            cursor: pointer;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: #ccc;
+        }
+        .active-bullet{
+            background-color: #333;
+        }
+    </style>
+
+<body>
+    
+        <div class="interface">
+            <div class="container">
+                <img style="opacity: 1;" src="https://picsum.photos/id/59/300/300"/>
+                <img style="opacity: 0;" src="https://picsum.photos/id/60/300/300"/>
+                <img style="opacity: 0;" src="https://picsum.photos/id/61/300/300"/>
+            </div>
+    
+            <div class="bullets">
+                <div class="bullet-single active-bullet"></div>
+                <div class="bullet-single"></div>
+                <div class="bullet-single"></div>
+            </div>
+        </div>
+
+<script>
+     // Select all images in the container
+     const images = document.querySelectorAll('.container img');
+    // Initialize lastIndex to keep track of the previously clicked image
+    let lastIndex = 0;
+
+    // Iterate over each image
+    images.forEach((item, index) => {
+        // Add a click event listener to each bullet
+        document.querySelectorAll('.bullet-single')[index]
+            .addEventListener('click', () => {
+                // Get the last displayed image and the currently clicked image based on the index
+                let lastImage = document.querySelectorAll('.container img')[lastIndex];
+                let actualImage = document.querySelectorAll('.container img')[index];
+                
+                // Remove the active-bullet class from the last bullet and add it to the clicked bullet
+                document.querySelectorAll('.bullet-single')[lastIndex]
+                    .classList.remove('active-bullet');
+                document.querySelectorAll('.bullet-single')[index]
+                    .classList.add('active-bullet');
+
+                // Hide the last image and display the clicked image
+                lastImage.style.opacity = 0;
+                actualImage.style.opacity = 1;
+
+                // Update lastIndex to the index of the clicked image
+                lastIndex = index;
+            })
+    });
+</script>
+
+</body>
+</html>
